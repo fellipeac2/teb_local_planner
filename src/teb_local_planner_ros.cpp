@@ -662,6 +662,8 @@ bool TebLocalPlannerROS::transformGlobalPlan(const tf2_ros::Buffer& tf, const st
       *current_goal_idx = 0;
       return false;
     }
+    ROS_INFO("entrou aqui");
+    tf.canTransform(global_frame, ros::Time::now(), plan_pose.header.frame_id, plan_pose.header.stamp, plan_pose.header.frame_id, ros::Duration(0.5));
 
     // get plan_to_global_transform from plan frame to global_frame
     geometry_msgs::TransformStamped plan_to_global_transform = tf.lookupTransform(global_frame, ros::Time(), plan_pose.header.frame_id, plan_pose.header.stamp,
@@ -753,7 +755,7 @@ bool TebLocalPlannerROS::transformGlobalPlan(const tf2_ros::Buffer& tf, const st
   }
   catch(tf::ExtrapolationException& ex) 
   {
-    ROS_ERROR("Extrapolation Error: %s\n", ex.what());
+    ROS_ERROR("Extrapolations Error: %s\n", ex.what());
     if (global_plan.size() > 0)
       ROS_ERROR("Global Frame: %s Plan Frame size %d: %s\n", global_frame.c_str(), (unsigned int)global_plan.size(), global_plan[0].header.frame_id.c_str());
 
