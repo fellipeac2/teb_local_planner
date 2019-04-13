@@ -662,7 +662,6 @@ bool TebLocalPlannerROS::transformGlobalPlan(const tf2_ros::Buffer& tf, const st
       *current_goal_idx = 0;
       return false;
     }
-    ROS_INFO("entrou aqui");
     tf.canTransform(global_frame, ros::Time::now(), plan_pose.header.frame_id, plan_pose.header.stamp, plan_pose.header.frame_id, ros::Duration(0.5));
 
     // get plan_to_global_transform from plan frame to global_frame
